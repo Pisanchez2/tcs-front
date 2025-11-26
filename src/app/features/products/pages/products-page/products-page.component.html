@@ -1,7 +1,34 @@
-<div class="options-container">
-  <app-product-search (searchChanged)="onSearchChanged($event)"></app-product-search>
-  <button (click)="onCreateNewItem()" class="primary">Agregar</button>
+<app-error-display
+  [message]="errorMessage()"
+  (closed)="clearError()"
+></app-error-display>
+<div class="page-container">
+  <div class="page-header">
+    <div class="page-actions">
+      <app-product-search (searchChanged)="onSearchChanged($event)"></app-product-search>
+      <button
+        (click)="onCreateNewItem()"
+        class="primary add-button"
+      >
+        Agregar Producto
+      </button>
+    </div>
+  </div>
+
+  <div class="page-content">
+    @if (isLoading()) {
+    <app-skeleton-loader [items]="5"></app-skeleton-loader>
+    } @else { @if (filteredProducts().length > 0) {
+    <app-product-list [products]="filteredProducts()"></app-product-list>
+    } @else {
+    <div class="empty-state">
+      <p>No hay productos disponibles</p>
+    </div>
+    } }
+  </div>
+
+  <div class="page-footer">
+    <app-product-table-size-items (sizePageChanged)="onPageSizeChanged($event)"></app-product-table-size-items>
+  </div>
 </div>
-<app-product-list [products]="filteredProducts()"></app-product-list>
-<app-product-table-size-items (sizePageChanged)="onPageSizeChanged($event)"></app-product-table-size-items>
 <app-product-delete-modal></app-product-delete-modal>

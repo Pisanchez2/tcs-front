@@ -1,29 +1,97 @@
 .dropdown {
   position: relative;
+  display: inline-block;
 }
 
 .drop-btn {
-  padding: 4px;
-  font-size: 14px;
-  border: none;
+  padding: 6px 8px;
+  transform: rotate(90deg);
+  font-size: 16px;
   cursor: pointer;
   background-color: transparent;
-  transform: rotate(90deg);
+  border-radius: 3px;
+  transition: all 0.2s;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #f5df66;
+    border-color: #daa;
+  }
+
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  z-index: 10;
-  background-color: #f9f9f9;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 100;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  top: 0;
   right: 0;
+  margin-top: 4px;
+  min-width: 120px;
+  overflow: hidden;
+  animation: dropdownSlide 0.2s ease-out;
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    transition: background-color 0.15s;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    &:active {
+      background-color: #eee;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #f0f0f0;
+    }
+  }
 }
 
-.dropdown-content button:hover {
-  background-color: #dacdb8
-}
-
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content,
+.dropdown.open .dropdown-content {
   display: block;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .drop-btn {
+    padding: 4px 6px;
+    font-size: 14px;
+  }
+
+  .dropdown-content {
+    min-width: 100px;
+
+    button {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+  }
 }

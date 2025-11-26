@@ -1,13 +1,46 @@
-.banner{
-  height: 40px;
+.banner {
+  height: 50px;
   width: 100%;
+  background-color: white;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  color: #333;
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.container{
-  padding: 20px;
-  background-color: #F4F6F9;
-  flex: 1;
+.container {
+  padding: 24px;
+  background-color: #f5f5f5;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    height: 44px;
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 12px;
+  }
 }
 
 

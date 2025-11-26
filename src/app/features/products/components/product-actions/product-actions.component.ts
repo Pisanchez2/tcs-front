@@ -1,9 +1,10 @@
-import {Component, inject, input} from '@angular/core';
-import {IProduct} from '../../../../core/models/product.model';
-import {Router} from '@angular/router';
-import {ProductDataService} from '../../../../core/services/product-data.service';
-import {ModalService} from '../../../../core/services/modal.service';
-import {ProductService} from '../../../../core/services/product.service';
+import { Component, inject, input, signal } from '@angular/core';
+import { IProduct } from '../../../../core/models/product.model';
+import { Router } from '@angular/router';
+import { ProductDataService } from '../../../../core/services/product-data.service';
+import { ModalService } from '../../../../core/services/modal.service';
+import { ProductService } from '../../../../core/services/product.service';
+import { ErrorHandlerService } from '../../../../core/services/error-handler.service';
 
 @Component({
   selector: 'app-product-actions',
@@ -16,24 +17,38 @@ export class ProductActionsComponent {
   protected readonly productDataService = inject(ProductDataService);
   protected readonly modalService = inject(ModalService);
   protected readonly productService = inject(ProductService);
-  product = input<IProduct>();
+  protected readonly errorHandler = inject(ErrorHandlerService);
 
-  onEditProduct() {
-    if (this.product()?.id) {
-      this.productDataService.setProductToEdit(this.product()!);
-      this.router.navigate([`/products/edit/${this.product()?.id}`]).then()
+  product = input<IProduct>();
+  isDeleting = signal(false);
+
+  onEditProduct(): void {
+    const prod = this.product();
+    if (prod?.id) {
+      this.productDataService.setProductToEdit(prod);
+      this.router.navigate([`/products/edit/${prod.id}`]);
     }
   }
 
-  onDeleteProduct() {
-    this.modalService.confirmDelete(this.product()!).then(
-      confirmed => {
-        if (confirmed) {
-          this.productService.deleteProduct(this.product()?.id!).subscribe(() => {
+  onDeleteProduct(): void {
+    const prod = this.product();
+    if (!prod) return;
+
+    this.modalService.confirmDelete(prod).then((confirmed) => {
+      if (confirmed) {
+        this.isDeleting.set(true);
+        this.productService.deleteProduct(prod.id).subscribe({
+          next: () => {
             this.productDataService.setProductWasDeleted(true);
-          });
-        }
+            this.isDeleting.set(false);
+          },
+          error: (error) => {
+            const message = this.errorHandler.getErrorMessage(error);
+            this.errorHandler.setError(message);
+            this.isDeleting.set(false);
+          }
+        });
       }
-    )
+    });
   }
 }

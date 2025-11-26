@@ -1,0 +1,62 @@
+.size-selector-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.size-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: inherit;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  min-width: 120px;
+
+  &:focus {
+    outline: none;
+    border-color: #f5df66;
+    box-shadow: 0 0 0 2px rgba(245, 223, 102, 0.1);
+  }
+
+  option {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .size-selector-wrapper {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  select {
+    font-size: 12px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .size-selector-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  select {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .size-label {
+    font-size: 12px;
+  }
+}

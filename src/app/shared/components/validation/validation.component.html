@@ -1,25 +1,27 @@
 @if (control()?.invalid && (control()?.dirty || control()?.touched)) {
-  @if (control()?.errors?.['required']) {
-    <small class="text-error">Este campo es requerido!</small>
-  }
+  <div class="validation-error">
+    @if (control()?.errors?.['required']) {
+      <small>Este campo es requerido</small>
+    }
 
-  @if (control()?.errors?.['idAlreadyExists']) {
-    <small class="text-error">{{label()}} no valido!</small>
-  }
+    @if (control()?.errors?.['idAlreadyExists']) {
+      <small>{{ label() }} ya existe</small>
+    }
 
-  @if (control()?.errors?.['invalid']) {
-    <small class="text-error">{{label()}} no valido!</small>
-  }
+    @if (control()?.errors?.['minlength']) {
+      <small>{{ label() }} debe tener al menos {{ control()?.errors?.['minlength']?.requiredLength }} caracteres</small>
+    }
 
-  @if (control()?.errors?.['maxlength']) {
-    <small class="text-error">{{label()}} no valido!</small>
-  }
+    @if (control()?.errors?.['maxlength']) {
+      <small>{{ label() }} no puede exceder {{ control()?.errors?.['maxlength']?.requiredLength }} caracteres</small>
+    }
 
-  @if (control()?.errors?.['minlength']) {
-    <small class="text-error">{{label()}} no valido!</small>
-  }
+    @if (control()?.errors?.['invalid']) {
+      <small>{{ label() }} no es válido</small>
+    }
 
-  @if (control()?.errors?.['dateRange']) {
-    <small class="text-error">Fechas no validas</small>
-  }
+    @if (control()?.errors?.['dateRange']) {
+      <small>Fechas no válidas</small>
+    }
+  </div>
 }

@@ -1,5 +1,7 @@
-<select [formControl]="sizeControl">
-  <option>5</option>
-  <option>10</option>
-  <option>20</option>
-</select>
+<div class="size-selector-wrapper">
+  <select id="sizeControl" [formControl]="sizeControl" aria-label="Seleccionar cantidad de elementos por página">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+  </select>
+</div>

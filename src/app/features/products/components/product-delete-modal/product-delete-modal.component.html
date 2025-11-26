@@ -1,9 +1,8 @@
-@if (isOpen()){
-  <div class="modal-overlay">
-    <div class="modal-content">
-
+@if (isOpen()) {
+  <div class="modal-overlay" (click)="onCancel()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
       <div class="modal-body">
-        <p> Estas seguro de eliminar el producto: {{ product()?.name }} ?</p>
+        <p>¿Estás seguro de eliminar el producto: <strong>{{ product()?.name }}</strong>?</p>
       </div>
 
       <div class="modal-footer">

@@ -1,0 +1,9 @@
+    @if (message()) {
+      <div class="error-alert">
+        <div class="error-content">
+          <span class="error-icon">⚠</span>
+          <p class="error-text">{{ message() }}</p>
+          <button class="error-close" (click)="onClose()">✕</button>
+        </div>
+      </div>
+    }

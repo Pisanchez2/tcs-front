@@ -1,23 +1,41 @@
-<table>
-  <tr>
-    <th>Logo</th>
-    <th>Nombre del producto</th>
-    <th>Descripcion</th>
-    <th>Fecha de liberacion</th>
-    <th>Fecha de reestructuracion</th>
-    <th></th>
-  </tr>
-  @for (product of products(); track product.id) {
-    <tr>
-      <td>{{ product.logo }}</td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.description }}</td>
-      <td>{{ product.date_release }}</td>
-      <td>{{ product.date_revision }}</td>
-      <td>
-        <app-product-actions [product]="product"></app-product-actions>
-      </td>
-    </tr>
-  }
-
-</table>
+@if (products().length > 0) {
+<div class="table-wrapper">
+  <table class="products-table">
+    <thead>
+      <tr>
+        <th>Logo</th>
+        <th>Nombre del producto</th>
+        <th>Descripcion</th>
+        <th>Fecha de liberacion</th>
+        <th>Fecha de reestructuracion</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products(); track product.id) {
+      <tr>
+        <td data-label="Logo">
+          <span class="logo-cell">{{ product.logo }}</span>
+        </td>
+        <td data-label="Nombre">{{ product.name }}</td>
+        <td
+          data-label="Descripción"
+          class="description-cell"
+        >
+          {{ product.description }}
+        </td>
+        <td data-label="Liberación">{{ product.date_release | date : "dd/MM/yyyy" }}</td>
+        <td data-label="Revisión">{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
+        <td data-label="Acciones">
+          <app-product-actions [product]="product"></app-product-actions>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
+} @else {
+<div class="empty-state">
+  <p>No hay productos disponibles</p>
+</div>
+}

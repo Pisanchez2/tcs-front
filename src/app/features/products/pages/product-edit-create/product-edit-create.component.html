@@ -1,12 +1,10 @@
 <div class="form-container">
+  <app-error-display [message]="errorMessage()" (closed)="clearError()"></app-error-display>
+
   <div class="content-center title-border">
     <h1>Formulario de Registro</h1>
   </div>
-  @if (errorMessage()){
-    <div class="error-container">
-      Un error ha ocurrido: {{errorMessage()}}, por favor intente nuevamente.
-    </div>
-  }
+
   <form [formGroup]="productForm">
     <div class="fields-container">
       <div class="form-control">
@@ -40,6 +38,7 @@
         <app-validation [control]="productForm.get('date_revision')" [label]="'Fecha Revision'" />
       </div>
     </div>
+
     @if (productForm.errors?.['dateRange']) {
       <div class="date-error-container">
         <small class="text-error">Fechas no validas</small>
@@ -50,9 +49,12 @@
         </ul>
       </div>
     }
+
     <div class="actions-container">
-      <button class="secondary" (click)="onReset()">Reiniciar</button>
-      <button [disabled]="productForm.invalid" class="primary" (click)="onSubmit()">Enviar</button>
+      <button type="button" class="secondary" (click)="onReset()" [disabled]="isSubmitting() || isEditing()">Reiniciar</button>
+      <button type="button" [disabled]="productForm.invalid || isSubmitting()" class="primary" (click)="onSubmit()">
+        {{ isSubmitting() ? 'Enviando...' : 'Enviar' }}
+      </button>
     </div>
   </form>
 </div>

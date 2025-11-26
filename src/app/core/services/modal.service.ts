@@ -5,48 +5,36 @@ import { IProduct } from '../models/product.model';
   providedIn: 'root'
 })
 export class ModalService {
-
-  isOpen = signal(false);
-  selectedProduct = signal<IProduct | null>(null);
-
-  open(item: IProduct) {
-    this.selectedProduct.set(item);
-    this.isOpen.set(true);
-  }
-
-  close() {
-    this.isOpen.set(false);
-    this.selectedProduct.set(null);
-  }
-
-  isOpenDelete = signal(false);
-  productToDelete = signal<IProduct | null>(null);
-
+  private readonly _isOpenDelete = signal(false);
+  private readonly _productToDelete = signal<IProduct | null>(null);
   private resolver: ((value: boolean) => void) | null = null;
 
-  confirmDelete(product: IProduct): Promise<boolean> {
-    this.productToDelete.set(product);
-    this.isOpenDelete.set(true);
+  readonly isOpenDelete = this._isOpenDelete.asReadonly();
+  readonly productToDelete = this._productToDelete.asReadonly();
 
-    return new Promise<boolean>(resolve => {
+  confirmDelete(product: IProduct): Promise<boolean> {
+    this._productToDelete.set(product);
+    this._isOpenDelete.set(true);
+
+    return new Promise<boolean>((resolve) => {
       this.resolver = resolve;
     });
   }
 
-  acceptDelete() {
-    this.isOpenDelete.set(false);
+  acceptDelete(): void {
+    this._isOpenDelete.set(false);
     this.resolver?.(true);
     this.clearDeleteState();
   }
 
-  cancelDelete() {
-    this.isOpenDelete.set(false);
+  cancelDelete(): void {
+    this._isOpenDelete.set(false);
     this.resolver?.(false);
     this.clearDeleteState();
   }
 
-  private clearDeleteState() {
-    this.productToDelete.set(null);
+  private clearDeleteState(): void {
+    this._productToDelete.set(null);
     this.resolver = null;
   }
 }
