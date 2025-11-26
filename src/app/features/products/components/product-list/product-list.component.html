@@ -17,12 +17,14 @@
         <td data-label="Logo">
           <span class="logo-cell">{{ product.logo }}</span>
         </td>
-        <td data-label="Nombre">{{ product.name }}</td>
+        <td data-label="Nombre">
+          <span class="name-cell">{{ product.name }}</span>
+        </td>
         <td
           data-label="Descripción"
           class="description-cell"
         >
-          {{ product.description }}
+          <span class="description-text">{{ product.description }}</span>
         </td>
         <td data-label="Liberación">{{ product.date_release | date : "dd/MM/yyyy" }}</td>
         <td data-label="Revisión">{{ product.date_revision | date : "dd/MM/yyyy" }}</td>
