@@ -1,0 +1,7 @@
+<div class="options-container">
+  <app-product-search (searchChanged)="onSearchChanged($event)"></app-product-search>
+  <button (click)="onCreateNewItem()" class="primary">Agregar</button>
+</div>
+<app-product-list [products]="filteredProducts()"></app-product-list>
+<app-product-table-size-items (sizePageChanged)="onPageSizeChanged($event)"></app-product-table-size-items>
+<app-product-delete-modal></app-product-delete-modal>

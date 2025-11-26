@@ -1,0 +1,44 @@
+.form-container{
+  background-color: white;
+  padding-bottom: 2rem;
+}
+
+.fields-container {
+  padding: 1rem 4rem;
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.title-border {
+  border-bottom: 1px solid black;
+}
+
+.form-control {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control-row {
+  display: flex;
+}
+
+.actions-container{
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.date-error-container{
+  padding: 1rem 4rem;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.error-message{
+  color: red;
+}
+

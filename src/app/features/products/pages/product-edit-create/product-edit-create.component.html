@@ -1,0 +1,58 @@
+<div class="form-container">
+  <div class="content-center title-border">
+    <h1>Formulario de Registro</h1>
+  </div>
+  @if (errorMessage()){
+    <div class="error-container">
+      Un error ha ocurrido: {{errorMessage()}}, por favor intente nuevamente.
+    </div>
+  }
+  <form [formGroup]="productForm">
+    <div class="fields-container">
+      <div class="form-control">
+        <label [htmlFor]="'id'">ID</label>
+        <input id="id" type="text" formControlName="id">
+        <app-validation [control]="productForm.get('id')" label="ID" />
+      </div>
+      <div class="form-control">
+        <label [htmlFor]="'name'">Nombre</label>
+        <input id="name" type="text" formControlName="name">
+        <app-validation [control]="productForm.get('name')" [label]="'Nombre'" />
+      </div>
+      <div class="form-control">
+        <label [htmlFor]="'description'">Descripcion</label>
+        <input id="description" type="text" formControlName="description">
+        <app-validation [control]="productForm.get('description')" [label]="'Descripcion'" />
+      </div>
+      <div class="form-control">
+        <label [htmlFor]="'logo'">Logo</label>
+        <input id="logo" type="text" formControlName="logo">
+        <app-validation [control]="productForm.get('logo')" [label]="'Logo'" />
+      </div>
+      <div class="form-control">
+        <label [htmlFor]="'date_release'">Fecha Liberacion</label>
+        <input id="date_release" type="date" formControlName="date_release">
+        <app-validation [control]="productForm.get('date_release')" [label]="'Fecha Liberacion'" />
+      </div>
+      <div class="form-control">
+        <label [htmlFor]="'date_revision'">Fecha Revision</label>
+        <input id="date_revision" type="date" formControlName="date_revision">
+        <app-validation [control]="productForm.get('date_revision')" [label]="'Fecha Revision'" />
+      </div>
+    </div>
+    @if (productForm.errors?.['dateRange']) {
+      <div class="date-error-container">
+        <small class="text-error">Fechas no validas</small>
+        <ul>
+          <li>Fecha Liberacion igual o mayor a la fecha actual</li>
+          <li>Fecha Revision debe ser mayor que la fecha liberacion</li>
+          <li>Fecha Revision debe ser exactamente un año posterior a la de liberacion</li>
+        </ul>
+      </div>
+    }
+    <div class="actions-container">
+      <button class="secondary" (click)="onReset()">Reiniciar</button>
+      <button [disabled]="productForm.invalid" class="primary" (click)="onSubmit()">Enviar</button>
+    </div>
+  </form>
+</div>

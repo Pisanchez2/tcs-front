@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>Logo</th>
+    <th>Nombre del producto</th>
+    <th>Descripcion</th>
+    <th>Fecha de liberacion</th>
+    <th>Fecha de reestructuracion</th>
+    <th></th>
+  </tr>
+  @for (product of products(); track product.id) {
+    <tr>
+      <td>{{ product.logo }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.date_release }}</td>
+      <td>{{ product.date_revision }}</td>
+      <td>
+        <app-product-actions [product]="product"></app-product-actions>
+      </td>
+    </tr>
+  }
+
+</table>

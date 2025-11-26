@@ -1,0 +1,19 @@
+@if (isOpen()){
+  <div class="modal-overlay">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <p> Estas seguro de eliminar el producto: {{ product()?.name }} ?</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="secondary" (click)="onCancel()">
+          Cancelar
+        </button>
+        <button type="button" class="primary" (click)="onConfirm()">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+}
