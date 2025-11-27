@@ -17,6 +17,20 @@ export class ErrorHandlerService {
   }
 
   getErrorMessage(error: any): string {
+
+    const validationErrors = error?.error?.errors ?? error?.errors;
+
+    if (Array.isArray(validationErrors) && validationErrors.length > 0) {
+      const firstError = validationErrors[0];
+
+      if (firstError?.constraints) {
+        const firstConstraintMessage = Object.values(firstError.constraints)[0];
+        if (firstConstraintMessage) {
+          return String(firstConstraintMessage);
+        }
+      }
+    }
+
     if (error?.error?.message) {
       return error.error.message;
     }

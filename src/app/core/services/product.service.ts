@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IProduct } from '../models/product.model';
+import {IProduct, IProductUpdate} from '../models/product.model';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -21,8 +21,8 @@ export class ProductService {
       .pipe(catchError(this.handleError));
   }
 
-  updateProduct(product: IProduct): Observable<IProduct> {
-    return this.http.put<IProduct>(
+  updateProduct(product: IProduct): Observable<IProductUpdate> {
+    return this.http.put<IProductUpdate>(
       `${this.API_URL}/${product.id}`,
       product
     ).pipe(catchError(this.handleError));

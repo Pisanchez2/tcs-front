@@ -70,12 +70,12 @@ export class ProductEditCreateComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected onReset(): void {
+  onReset(): void {
     this.productForm.reset();
     this.errorMessage.set(null);
   }
 
-  protected onSubmit(): void {
+  onSubmit(): void {
     if (this.productForm.invalid || this.isSubmitting()) return;
 
     this.isSubmitting.set(true);
@@ -91,7 +91,7 @@ export class ProductEditCreateComponent implements OnInit, OnDestroy {
     }
   }
 
-  private createProduct(productData: IProduct): void {
+  createProduct(productData: IProduct): void {
     this.productService.createProduct(productData).subscribe({
       next: () => {
         this.notificationService.success('Producto creado exitosamente');
@@ -106,7 +106,7 @@ export class ProductEditCreateComponent implements OnInit, OnDestroy {
     });
   }
 
-  private updateProduct(productData: IProduct): void {
+  updateProduct(productData: IProduct): void {
     this.productService.updateProduct(productData).subscribe({
       next: () => {
         this.notificationService.success('Producto actualizado exitosamente');
