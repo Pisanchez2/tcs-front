@@ -16,7 +16,7 @@ export class NotificationService {
   private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   show(notification: NotificationMessage): void {
-    const id = notification.duration || 3000;
+    const duration = notification.duration || 3000;
 
     this.notificationsSignal.update((notifications) => [
       ...notifications,
@@ -24,14 +24,14 @@ export class NotificationService {
     ]);
 
     if (this.timeoutId) {
-      clearTimeout(this.timeoutId);
+      this.clear();
     }
 
     this.timeoutId = setTimeout(() => {
       this.notificationsSignal.update((notifications) =>
         notifications.filter((n) => n.message !== notification.message)
       );
-    }, id);
+    }, duration);
   }
 
   success(message: string, duration?: number): void {

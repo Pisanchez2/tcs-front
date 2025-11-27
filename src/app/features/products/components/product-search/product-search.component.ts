@@ -10,7 +10,7 @@ import { APP_CONSTANTS } from '../../../../shared/constants/app.constants';
   styleUrl: './product-search.component.scss'
 })
 export class ProductSearchComponent implements OnInit, OnDestroy {
-  placeholder = input('Buscar productos...');
+  placeholder = input('Search...');
   searchChanged = output<string>();
 
   searchControl = new FormControl('');

@@ -5,7 +5,7 @@ import { ProductService } from '../../../../core/services/product.service';
 import { CustomValidators } from '../../../../shared/validators/custom-validators';
 import { ValidationComponent } from '../../../../shared/components/validation/validation.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { transformAndTrimFormValue } from '../../../../shared/utils/product.utils';
+import { mapFormValuesToProduct } from '../../../../shared/utils/product.utils';
 import { ProductDataService } from '../../../../core/services/product-data.service';
 import { ErrorHandlerService } from '../../../../core/services/error-handler.service';
 import { NotificationService } from '../../../../core/services/notification.service';
@@ -82,7 +82,7 @@ export class ProductEditCreateComponent implements OnInit, OnDestroy {
     this.errorMessage.set(null);
 
     const formValue = this.productForm.getRawValue();
-    const productData: IProduct = transformAndTrimFormValue(formValue);
+    const productData: IProduct = mapFormValuesToProduct(formValue);
 
     if (this.isEditing()) {
       this.updateProduct(productData);

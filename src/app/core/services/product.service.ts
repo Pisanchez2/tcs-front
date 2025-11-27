@@ -28,8 +28,8 @@ export class ProductService {
     ).pipe(catchError(this.handleError));
   }
 
-  deleteProduct(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.API_URL}/${id}`)
+  deleteProduct(id: string): Observable<{message:string}> {
+    return this.http.delete<{message:string}>(`${this.API_URL}/${id}`)
       .pipe(catchError(this.handleError));
   }
 

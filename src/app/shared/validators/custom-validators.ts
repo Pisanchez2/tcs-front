@@ -40,7 +40,7 @@ export class CustomValidators {
       const revisionDate = new Date(dateRevision.value);
       const today = new Date();
 
-      if (releaseDate > today) {
+      if (releaseDate < today) {
         return { dateRange: true };
       }
 
